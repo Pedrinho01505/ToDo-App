@@ -14,6 +14,22 @@ app.use(express.urlencoded({
     extended: true
 }))
 
+app.post('/excluir', (requisicao, resposta) => {
+    const id= requisicao.body.id
+
+    const sql= `
+    DELETE FROM tarefas 
+    WHERE id = ${id}`
+
+    conexao.query(sql, (erro) => {
+        if (erro) {
+            return console.log(erro)
+        }
+
+        resposta.redirect('/')
+    })
+})
+
 app.use(express.json())
 
 app.post('/completar', (requisicao, resposta) => {
@@ -25,10 +41,12 @@ app.post('/completar', (requisicao, resposta) => {
     WHERE id = ${id}`
 
     conexao.query(sql, (erro) => {
-        return console.log(erro)
+        if (erro) {
+            return console.log(erro)
+        }
+        
+        resposta.redirect('/')
     })
-
-    resposta.redirect('/')
 })
 
 app.post('/descompletar', (requisicao, resposta) => {
@@ -42,10 +60,12 @@ app.post('/descompletar', (requisicao, resposta) => {
     WHERE id = ${id}`
 
     conexao.query(sql, (erro) => {
-        return console.log(erro)
+        if (erro) {
+            return console.log(erro)
+        }
+        
+        resposta.redirect('/')
     })
-
-    resposta.redirect('/')
 })
 
 app.post('/criar', (requisicao, resposta) => {
