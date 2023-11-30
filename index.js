@@ -17,9 +17,10 @@ app.use(express.urlencoded({
 app.post('/excluir', (requisicao, resposta) => {
     const id= requisicao.body.id
 
-    const sql= `
-    DELETE FROM tarefas 
-    WHERE id = ${id}`
+    const sql = `
+        DELETE FROM tarefas 
+        WHERE id = ${id}
+    `
 
     conexao.query(sql, (erro) => {
         if (erro) {
@@ -138,7 +139,7 @@ app.get('/ativas', (requisicao, resposta) => {
            } 
         })
 
-        const quantidadeTarefasAtivas = tarefas.length 
+        const quantidadeTarefas = tarefas.length 
 
         resposta.render('ativas', {tarefas, quantidadeTarefas})
     })
