@@ -14,6 +14,8 @@ app.use(express.urlencoded({
     extended: true
 }))
 
+app.use(express.json())
+
 app.post('/excluir', (requisicao, resposta) => {
     const id= requisicao.body.id
 
